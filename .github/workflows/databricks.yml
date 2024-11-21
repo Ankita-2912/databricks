@@ -36,4 +36,4 @@ jobs:
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
       run: |
         echo "Deploying Notebooks to Databricks..."
-        databricks workspace import_dir --overwrite "Export-Notebooks" "/Notebooks/"
+        databricks workspace import_dir --overwrite "Test-Notebooks" "/Notebooks/"
