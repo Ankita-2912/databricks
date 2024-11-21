@@ -1,6 +1,10 @@
 name: Databricks Notebook Deployment
 
-on: workflow_dispatch
+on: 
+  push:
+    branches:
+      - feature
+  workflow_dispatch:
 
 jobs:
   deploy-notebooks:
