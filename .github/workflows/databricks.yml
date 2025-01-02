@@ -48,10 +48,10 @@ jobs:
         echo jobs-api-version=2.1 >> ~\.databrickscfg
         databricks workspace ls /  
 
-    - name: Deploy Notebooks to Databricks workspace
-      env:
-        DATABRICKS_HOST: ${{ vars.DATABRICKS_URL }}
-        DATABRICKS_TOKEN: ${{ secrets.PAT_TOKEN }}
+    # - name: Deploy Notebooks to Databricks workspace
+    #   env:
+    #     DATABRICKS_HOST: ${{ vars.DATABRICKS_URL }}
+    #     DATABRICKS_TOKEN: ${{ secrets.PAT_TOKEN }}
 
     - name: Deploy Notebooks
       env:
