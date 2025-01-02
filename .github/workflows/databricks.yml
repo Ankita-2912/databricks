@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy-notebooks:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Check out repository
@@ -24,15 +24,34 @@ jobs:
         pip install databricks-cli
         pip install --upgrade databricks-cli
 
+    # - name: Authenticate Databricks CLI
+    #   env:
+    #     DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+    #     DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+    #   run: |
+    #     echo "Authenticating Databricks CLI..."
+    #     echo $DATABRICKS_HOST
+    #     echo $DATABRICKS_TOKEN
+    #     databricks workspace ls /  
+
     - name: Authenticate Databricks CLI
       env:
         DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
         DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
       run: |
-        echo "Authenticating Databricks CLI..."
-        echo $DATABRICKS_HOST
-        echo $DATABRICKS_TOKEN
+        # echo "Authenticating Databricks CLI..."
+        # echo $DATABRICKS_HOST
+        # echo $DATABRICKS_TOKEN
+        echo [DEFAULT] > ~\.databrickscfg
+        echo host=${{ vars.DATABRICKS_HOST }} >> ~\.databrickscfg
+        echo token=${{ secrets.DATABRICKS_TOKEN }} >> ~\.databrickscfg
+        echo jobs-api-version=2.1 >> ~\.databrickscfg
         databricks workspace ls /  
+
+    - name: Deploy Notebooks to Databricks workspace
+      env:
+        DATABRICKS_HOST: ${{ vars.DATABRICKS_URL }}
+        DATABRICKS_TOKEN: ${{ secrets.PAT_TOKEN }}
 
     - name: Deploy Notebooks
       env:
