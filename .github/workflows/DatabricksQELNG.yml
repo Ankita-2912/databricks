@@ -49,4 +49,5 @@ jobs:
         DATABRICKS_HOST: ${{ vars.DATABRICKS_URL }}
         DATABRICKS_TOKEN: ${{ secrets.PAT_TOKEN }}
       run: |
-        databricks workspace import_dir --overwrite "${{github.workspace}}/Development/" "/Shared"
+        # databricks workspace import_dir --overwrite "${{github.workspace}}/Development/" "/Shared"
+        databricks workspace import_dir --overwrite "Test-Notebooks" "/Notebooks/"
